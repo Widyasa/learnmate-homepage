@@ -34,7 +34,6 @@ export default function RegisterPage() {
     password: "",
     confirmPassword: "",
     name: "",
-    agreeToTerms: false,
   })
   const [errors, setErrors] = useState({
     email: "",
@@ -66,18 +65,6 @@ export default function RegisterPage() {
     }
   }
 
-  const handleCheckboxChange = (checked: boolean) => {
-    setFormData((prev) => ({
-      ...prev,
-      agreeToTerms: checked,
-    }))
-    if (errors.agreeToTerms) {
-      setErrors((prev) => ({
-        ...prev,
-        agreeToTerms: "",
-      }))
-    }
-  }
 
   const validateForm = () => {
     const newErrors = {
@@ -85,7 +72,6 @@ export default function RegisterPage() {
       password: "",
       confirmPassword: "",
       name: "",
-      agreeToTerms: "",
       submit: "",
     }
     if (!formData.email) {
@@ -105,9 +91,6 @@ export default function RegisterPage() {
     }
     if (!formData.name) {
       newErrors.name = "Name is required"
-    }
-    if (!formData.agreeToTerms) {
-      newErrors.agreeToTerms = "You must agree to the terms and privacy policy"
     }
     setErrors(newErrors)
     return Object.values(newErrors).every((error) => !error)

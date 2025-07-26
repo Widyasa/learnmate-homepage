@@ -236,7 +236,7 @@ export default function SubModulePage() {
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-gray-100 bg-white/80 px-4 py-3 backdrop-blur-sm">
         <div className="container mx-auto flex items-center justify-between">
-            <Link href="/learning-modules" className="text-lg font-semibold text-teal-700">
+            <Link href={`/module/${subModule.module_id}`} className="text-lg font-semibold text-teal-700">
                 &larr; Kembali ke Modul
             </Link>
         </div>
