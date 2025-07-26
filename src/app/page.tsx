@@ -94,10 +94,10 @@ const [modules, setModules] = useState<any[]>([])
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Header */}
-      <header className="border-b border-gray-100 px-4 py-4 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
+      <header className="border-b border-gray-100 px-4 py-5 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <img src="logo.svg" alt="" />
+            <img src="images/logo.png" alt="" className=""/>
           </Link>
 
           {/* Desktop Navigation */}
@@ -105,12 +105,12 @@ const [modules, setModules] = useState<any[]>([])
             <Link href="/" className=" hover:text-teal-600 font-medium transition-colors text-lg text-teal-600  border-b-2 border-teal-600">
               Home
             </Link>
-            <button
-              onClick={() => handleProtectedRoute("/learncore")}
+            <Link
+              href="/learning-modules"
               className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg"
             >
               LearnCore
-            </button>
+            </Link>
             <button
               onClick={() => handleProtectedRoute("/chatbot")}
               className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg"
@@ -128,7 +128,7 @@ const [modules, setModules] = useState<any[]>([])
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
             {isLoggedIn ? (
-              <Button onClick={handleLogout} className="bg-teal-600 hover:bg-teal-700 transition-colors">
+              <Button onClick={handleLogout} className="py-6 px-8 text-[16px] bg-teal-600 hover:bg-teal-700 transition-colors">
                 Logout
               </Button>
             ) : (
@@ -136,13 +136,13 @@ const [modules, setModules] = useState<any[]>([])
                 <Link href="/register">
                   <Button
                     variant="outline"
-                    className="border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent transition-colors"
+                    className="py-6 px-8 text-[16px] border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent transition-colors"
                   >
                     Sign Up
                   </Button>
                 </Link>
                 <Link href="/login">
-                  <Button className="bg-teal-600 hover:bg-teal-700 transition-colors">Login</Button>
+                  <Button className="py-6 px-8 text-[16px] bg-teal-600 hover:bg-teal-700 transition-colors">Login</Button>
                 </Link>
               </>
             )}
@@ -206,30 +206,40 @@ const [modules, setModules] = useState<any[]>([])
       </header>
 
       {/* Hero Section */}
-      <section className="container mx-auto px-4 py-16 lg:py-24 min-h-screen ">
-      <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
+      <section className=" py-20 lg:py-24 min-h-screen "
+        style={{
+          backgroundImage: "url('/images/bg.svg')",
+          backgroundRepeat: "repeat",
+          backgroundPosition: "center",
+        }}
+      >
+      <div className="flex flex-col container mx-auto px-4 lg:flex-row items-center justify-between gap-12">
         <div className="lg:w-1/2 text-center lg:text-left">
-          <Badge className="bg-teal-100 text-teal-800 mb-6 px-4 py-2 text-sm font-medium">
+          <Badge className="bg-teal-100 text-teal-800 hover:bg-teal-100 mb-6 px-4 py-2 text-sm font-medium">
             Personalisasi AI dengan Teknologi Terdepan
           </Badge>
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6 leading-tight">
+          <h1 className="text-4xl lg:text-7xl font-bold mb-6 leading-tight">
             <span className="text-orange-400">LearnMate:</span>{" "}
-            <span className="text-gray-800">Your Smart Learning Companion</span>
+            <span className="text-gray-800">Your Smart Learning Mate </span>
           </h1>
-          <p className="text-gray-600 text-lg lg:text-xl mb-8 leading-relaxed max-w-2xl">
+          <p className="text-gray-600 text-xl lg:text-xl mb-8 leading-relaxed max-w-2xl">
             Platform pembelajaran AI yang dirancang untuk memberikan pengalaman belajar yang dipersonalisasi dan efektif
             untuk mendukung setiap langkah perjalanan belajar Anda.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-            <Button className="bg-teal-600 hover:bg-teal-700 p-6 text-sm font-semibold shadow-lg hover:shadow-xl transition-all">
-              Mulai Belajar Gratis
-            </Button>
-            <Button
-              variant="outline"
-              className="border-teal-600 text-teal-600 hover:bg-teal-50 p-6 text-sm font-semibold transition-all bg-transparent"
-            >
-              Lihat Semua Materi
-            </Button>
+            <Link href='/learning-modules'>
+              <Button className="bg-teal-600 hover:bg-teal-700 text-white p-6 text-sm font-semibold transition-all">
+                Mulai Belajar
+              </Button>
+            </Link>
+            <Link href="/chatbot">
+              <Button
+                variant="outline"
+                className="border-teal-600 text-teal-600 hover:bg-teal-50 p-6 text-sm font-semibold transition-all bg-white"
+              >
+                Chat dengan AI
+              </Button>
+            </Link>
           </div>
         </div>
         <div className="lg:w-1/2 flex justify-center">
@@ -238,9 +248,9 @@ const [modules, setModules] = useState<any[]>([])
             <Image
               src="/images/hero-img.png"
               alt="LearnMate AI Robot Mascot"
-              width={500}
-              height={500}
-              className="relative z-10 max-w-full h-auto drop-shadow-2xl"
+              width={800}
+              height={800}
+              className="relative z-10 max-w-full h-auto drop-shadow-2xl lg:block hidden"
             />
           </div>
         </div>
@@ -376,9 +386,9 @@ const [modules, setModules] = useState<any[]>([])
                   </div>
                 </div>
               </div>
-              <Button className="bg-teal-600 hover:bg-teal-700 text-sm p-6 font-semibold shadow-lg hover:shadow-xl transition-all">
+              {/* <Button className="bg-teal-600 hover:bg-teal-700 text-sm p-6 font-semibold shadow-lg hover:shadow-xl transition-all">
                 Mulai Sekarang
-              </Button>
+              </Button> */}
             </div>
           </div>
         </div>
@@ -399,20 +409,20 @@ const [modules, setModules] = useState<any[]>([])
           {modules.map((module) => (
             <div
               key={module.module_id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+              className="bg-white rounded-lg border border-gray-200 p-4 shadow-md overflow-hidden hover:shadow-lg transition-shadow"
             >
               {/* Module Image */}
               <div className="relative h-48 bg-gray-100">
                 <img
                   src={module.thumbnail || "/placeholder.svg"}
                   alt={module.module_title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
 
               {/* Module Content */}
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-orange-500 mb-2">{module.module_title}</h3>
+                <h3 className="text-lg font-semibold text-orange-500 mb-2">{module.module_title.length > 30? module.module_title.slice(0, 30) + "...": module.module_title}</h3>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-4">{module.module_summary}</p>
 
                 {/* Duration */}
@@ -422,21 +432,24 @@ const [modules, setModules] = useState<any[]>([])
                 </div>
 
                 {/* Learn Button */}
-                <Button
-                  onClick={() => handleModuleClick(module.module_id)}
-                  className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-md font-medium"
-                >
-                  Belajar Modul
-                </Button>
+                  <Link
+                    href={`/module/${module.module_id}`}
+                  >
+                    <button className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-md font-medium">
+                      Mulai Belajar
+                    </button>
+                  </Link>
               </div>
             </div>
           ))}
         </div>
 
         <div className="text-center">
-          <Button className="bg-white text-teal-600 hover:bg-gray-50 p-6 text-sm font-semibold shadow-lg hover:shadow-xl transition-all">
-            Lihat Semua Modul
-          </Button>
+          <Link href="/learning-modules">
+            <Button className="bg-white text-teal-600 hover:bg-gray-50 p-6 text-sm font-semibold shadow-lg hover:shadow-xl transition-all">
+              Lihat Semua Modul
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
@@ -500,8 +513,7 @@ const [modules, setModules] = useState<any[]>([])
           <div className="grid md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center space-x-2 mb-4">
-                <div className="bg-teal-600 text-white px-2 py-1 rounded font-bold text-lg">LM</div>
-                <span className="font-semibold">Your Smart Learning Mate</span>
+                <img src="images/logo.png" alt="LearnAI Logo" className="h-20" />
               </div>
               <p className="text-gray-400 text-sm">Copyright by LearnAI. All rights reserved.</p>
             </div>

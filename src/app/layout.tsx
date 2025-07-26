@@ -1,12 +1,20 @@
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+// 1. Impor font Urbanist dari next/font/google
+import { Urbanist } from 'next/font/google'
 import './globals.css'
 
+// 2. Konfigurasikan font yang ingin Anda gunakan
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700', '800'], // Pilih weight yang Anda butuhkan
+})
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
-  generator: 'v0.dev',
+  title: 'LearnMate',
+  description: 'AI-Powered Learning Platform',
+  icons: {
+    icon: 'images/logo.ico',
+  }
 }
 
 export default function RootLayout({
@@ -15,11 +23,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+    // 3. Terapkan class font ke elemen html atau body
     <html lang="en">
-      <head>
-        <style></style>
-      </head>
-      <body>{children}</body>
+      <body className={urbanist.className}>{children}</body>
     </html>
   )
 }

@@ -165,7 +165,7 @@ export default function RegisterPage() {
       <header className="border-b border-gray-100 px-4 py-4 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <img src="logo.svg" alt="" />
+            <img src="images/logo.png" alt="" className="" />
           </Link>
 
           {/* Desktop Navigation */}
@@ -230,20 +230,22 @@ export default function RegisterPage() {
           </div>
         )}
       </header>
-      <div className="flex h-screen">
-        <div className="hidden lg:flex lg:w-1/2 items-center justify-center h-full">
-          <div className="h-full w-full">
+      <div className="flex h-screen"
+             style={{
+             backgroundImage: "url('/images/bg.svg')",
+             backgroundRepeat: "repeat",
+             backgroundPosition: "center",
+           }}>
+        <div className="container mx-auto flex my-[150px] rounded-lg shadow-md border border-gray-200 overflow-hidden">
             <img
               src="/images/auth-img.png"
               alt="Students studying together"
-              className="w-full h-full"
+              className="hidden md:block w-1/2 h-full object-cover"
             />
-          </div>
-        </div>
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
-          <div className="w-full max-w-md space-y-6">
+          <div className="w-full bg-gray-50 flex justify-center items-center">
+          <div className="w-full max-w-2xl space-y-6 p-10">
             <div className="text-center">
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">Create Account</h1>
+              <h1 className="text-6xl font-bold text-gray-800 mb-2">Create Account</h1>
               <p className="text-gray-600">Create your account to start your learning path</p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -256,7 +258,7 @@ export default function RegisterPage() {
                   placeholder="Full Name"
                   value={formData.name}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 ${
+                  className={`w-full p-8 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 ${
                     errors.name ? "ring-2 ring-red-500 focus:ring-red-500" : ""
                   }`}
                   required
@@ -272,7 +274,7 @@ export default function RegisterPage() {
                   placeholder="Email"
                   value={formData.email}
                   onChange={handleInputChange}
-                  className={`w-full px-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 ${
+                  className={`w-full p-8 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 ${
                     errors.email ? "ring-2 ring-red-500 focus:ring-red-500" : ""
                   }`}
                   required
@@ -289,7 +291,7 @@ export default function RegisterPage() {
                     placeholder="Password"
                     value={formData.password}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 pr-12 ${
+                    className={`w-full p-8 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 pr-12 ${
                       errors.password ? "ring-2 ring-red-500 focus:ring-red-500" : ""
                     }`}
                     required
@@ -314,7 +316,7 @@ export default function RegisterPage() {
                     placeholder="Re-Password"
                     value={formData.confirmPassword}
                     onChange={handleInputChange}
-                    className={`w-full px-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 pr-12 ${
+                    className={`w-full p-8 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 pr-12 ${
                       errors.confirmPassword ? "ring-2 ring-red-500 focus:ring-red-500" : ""
                     }`}
                     required
@@ -363,6 +365,7 @@ export default function RegisterPage() {
               </p>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

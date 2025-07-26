@@ -30,7 +30,12 @@ export default function LearningModulesPage() {
   const [userTech, setUserTech] = useState("")
   const router = useRouter()
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-
+  // Check login status on component mount
+  useEffect(() => {
+    const loginStatus = localStorage.getItem("isLoggedIn")
+    const loggedIn = loginStatus === "true"
+    setIsLoggedIn(loggedIn)
+  }, [])
 
 useEffect(() => {
   async function fetchModules() {
@@ -96,9 +101,7 @@ useEffect(() => {
     }
   }
 
-  const handleModuleClick = (moduleId: number) => {
-    router.push(`/module/${moduleId}`)
-  }
+
 
   if (isLoading) {
     return (
@@ -111,10 +114,10 @@ useEffect(() => {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-          <header className="border-b border-gray-100 px-4 py-4 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
+          <header className="border-b border-gray-100 px-4 py-5 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <img src="logo.svg" alt="" />
+            <img src="images/logo.png" alt="" className=""/>
           </Link>
 
           {/* Desktop Navigation */}
@@ -124,7 +127,7 @@ useEffect(() => {
             </Link>
             <button
               onClick={() => handleProtectedRoute("/learncore")}
-              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg text-teal-600  border-b-2 border-teal-600"
+              className=" hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg text-teal-600  border-b-2 border-teal-600"
             >
               LearnCore
             </button>
@@ -145,7 +148,7 @@ useEffect(() => {
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
             {isLoggedIn ? (
-              <Button onClick={handleLogout} className="bg-teal-600 hover:bg-teal-700 transition-colors">
+              <Button onClick={handleLogout} className="py-6 px-8 text-[16px] bg-teal-600 hover:bg-teal-700 transition-colors">
                 Logout
               </Button>
             ) : (
@@ -153,13 +156,13 @@ useEffect(() => {
                 <Link href="/register">
                   <Button
                     variant="outline"
-                    className="border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent transition-colors"
+                    className="py-6 px-8 text-[16px] border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent transition-colors"
                   >
                     Sign Up
                   </Button>
                 </Link>
                 <Link href="/login">
-                  <Button className="bg-teal-600 hover:bg-teal-700 transition-colors">Login</Button>
+                  <Button className="py-6 px-8 text-[16px] bg-teal-600 hover:bg-teal-700 transition-colors">Login</Button>
                 </Link>
               </>
             )}
@@ -223,7 +226,7 @@ useEffect(() => {
       </header>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-12 mt-1">
+      <main className="container mx-auto px-4 py-12 mt-20">
         {/* Title Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800 mb-4">Rekomendasi Modul Pembelajaran</h1>
@@ -243,20 +246,20 @@ useEffect(() => {
           {recommendedModules.map((module) => (
             <div
               key={module.module_id}
-              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+              className="bg-white rounded-lg border border-gray-200 p-4 shadow-md overflow-hidden hover:shadow-lg transition-shadow"
             >
               {/* Module Image */}
               <div className="relative h-48 bg-gray-100">
                 <img
                   src={module.thumbnail || "/placeholder.svg"}
                   alt={module.module_title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-cover rounded-lg"
                 />
               </div>
 
               {/* Module Content */}
               <div className="p-4">
-                <h3 className="text-lg font-semibold text-orange-500 mb-2">{module.module_title}</h3>
+                <h3 className="text-lg font-semibold text-orange-500 mb-2">{module.module_title.length > 25 ? module.module_title.slice(0, 25) + "..." : module.module_title}</h3>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-4">{module.module_summary}</p>
 
                 {/* Duration */}
@@ -266,12 +269,13 @@ useEffect(() => {
                 </div>
 
                 {/* Learn Button */}
-                <Button
-                  onClick={() => handleModuleClick(module.module_id)}
-                  className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-md font-medium"
-                >
-                  Belajar Modul
-                </Button>
+                  <Link
+                    href={`/module/${module.module_id}`}
+                  >
+                    <button className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-md font-medium">
+                      Mulai Belajar
+                    </button>
+                  </Link>
               </div>
             </div>
           ))}

@@ -154,10 +154,10 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-white">
-       <header className="border-b border-gray-100 px-4 py-4 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
+       <header className="border-b border-gray-100 px-4 py-5 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <img src="logo.svg" alt="" />
+            <img src="images/logo.png" alt="" className=""/>
           </Link>
 
           {/* Desktop Navigation */}
@@ -222,108 +222,111 @@ export default function LoginPage() {
           </div>
         )}
       </header>
-      <div className="flex h-screen">
-        <div className="hidden lg:flex lg:w-1/2 items-center justify-center h-full">
-          <div className="h-full w-full">
+      <div className="flex h-screen"
+           style={{
+             backgroundImage: "url('/images/bg.svg')",
+             backgroundRepeat: "repeat",
+             backgroundPosition: "center",
+           }}>
+        <div className="container mx-auto flex my-[150px] rounded-lg shadow-md border border-gray-200 overflow-hidden ">
             <img
               src="/images/auth-img.png"
               alt="Students studying together"
-              className="w-full h-full"
+              className="hidden md:block w-1/2 h-full object-cover"
             />
-          </div>
-        </div>
-        <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-gray-50">
-          <div className="w-full max-w-md space-y-6">
-            <div className="text-center">
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">Login</h1>
-              <p className="text-gray-600">Login to access your account</p>
-            </div>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="sr-only">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="Email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  className={`w-full px-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 ${
-                    errors.email ? "ring-2 ring-red-500 focus:ring-red-500" : ""
-                  }`}
-                  required
-                />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="password" className="sr-only">Password</Label>
-                <div className="relative">
-                  <Input
-                    id="password"
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className={`w-full px-4 py-4 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-700 pr-12 ${
-                      errors.password ? "ring-2 ring-red-500 focus:ring-red-500" : ""
-                    }`}
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
-                  >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-                {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox
-                  id="rememberMe"
-                  checked={formData.rememberMe}
-                  onCheckedChange={handleCheckboxChange}
-                  className="border-gray-300"
-                />
-                <Label htmlFor="rememberMe" className="text-sm text-gray-600 cursor-pointer">
-                  Keep me logged in
-                </Label>
-              </div>
-              {errors.submit && <p className="text-red-500 text-sm mt-2">{errors.submit}</p>}
-              <Button
-                type="submit"
-                disabled={isLoading}
-                className="w-full bg-teal-600 hover:bg-teal-700 text-white p-6 rounded-lg font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {isLoading ? (
-                  <div className="flex items-center justify-center">
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                    Logging in...
+            <div className="w-full bg-gray-50 flex justify-center items-center">
+                 <div className="w-full max-w-2xl space-y-6  p-10">
+                  <div className="text-center">
+                    <h1 className="text-6xl font-bold text-gray-800 mb-2">Login</h1>
+                    <p className="text-gray-600">Login to access your account</p>
                   </div>
-                ) : (
-                  "Log in"
-                )}
-              </Button>
-            </form>
-            <div className="relative">
-              <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-gray-50 text-gray-500 font-medium">OR</span>
-              </div>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="sr-only">Email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="Email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        className={`w-full p-8 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent text-gray-700 ${
+                          errors.email ? "ring-2 ring-red-500 focus:ring-red-500" : ""
+                        }`}
+                        required
+                      />
+                      {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="password" className="sr-only">Password</Label>
+                      <div className="relative">
+                        <Input
+                          id="password"
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Password"
+                          value={formData.password}
+                          onChange={handleInputChange}
+                          className={`w-full p-8 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-600 focus:border-transparent text-gray-700 pr-12 ${
+                            errors.password ? "ring-2 ring-red-500 focus:ring-red-500" : ""
+                          }`}
+                          required
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                        >
+                          {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                        </button>
+                      </div>
+                      {errors.password && <p className="text-red-500 text-sm mt-1">{errors.password}</p>}
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox
+                        id="rememberMe"
+                        checked={formData.rememberMe}
+                        onCheckedChange={handleCheckboxChange}
+                        className="border-gray-300"
+                      />
+                      <Label htmlFor="rememberMe" className="text-sm text-gray-600 cursor-pointer">
+                        Keep me logged in
+                      </Label>
+                    </div>
+                    {errors.submit && <p className="text-red-500 text-sm mt-2">{errors.submit}</p>}
+                    <Button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full bg-teal-600 hover:bg-teal-700 text-white p-6 rounded-lg font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      {isLoading ? (
+                        <div className="flex items-center justify-center">
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                          Logging in...
+                        </div>
+                      ) : (
+                        "Log in"
+                      )}
+                    </Button>
+                  </form>
+                  <div className="relative">
+                    <div className="absolute inset-0 flex items-center">
+                      <div className="w-full border-t border-gray-300" />
+                    </div>
+                    <div className="relative flex justify-center text-sm">
+                      <span className="px-4 bg-gray-50 text-gray-500 font-medium">OR</span>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-gray-600">
+                      Don't have an account?{" "}
+                      <Link href="/register" className="text-teal-600 hover:text-teal-800 font-medium">
+                        Create Account
+                      </Link>
+                    </p>
+                  </div>
+                </div>
             </div>
-            <div className="text-center">
-              <p className="text-gray-600">
-                Don't have an account?{" "}
-                <Link href="/register" className="text-teal-600 hover:text-teal-800 font-medium">
-                  Create Account
-                </Link>
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

@@ -161,3 +161,6 @@ html {
   margin-bottom: 0.5rem;
   line-height: 1.6;
 }
+input, textarea, select, button {
+  box-shadow: none !important;
+}

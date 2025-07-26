@@ -122,17 +122,14 @@ export default function ModuleDetailPage() {
       return
     }
 
+
     if (!checkedSubModules.includes(subModule.id)) {
       const updated = [...checkedSubModules, subModule.id]
       setCheckedSubModulesState(updated)
       setCheckedSubModules(moduleId, updated)
     }
 
-    alert(
-      checkedSubModules.includes(subModule.id)
-        ? `Meninjau kembali: ${subModule.title}`
-        : `Memulai pembelajaran: ${subModule.title}`
-    )
+    router.push(`/submodule/${moduleId}/${subModule.slug}`)
   }
 
   const getSubModuleIcon = (subModule: SubModule) => {
@@ -168,10 +165,10 @@ export default function ModuleDetailPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-             <header className="border-b border-gray-100 px-4 py-4 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
+             <header className="border-b border-gray-100 px-4 py-5 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
-            <img src="logo.svg" alt="" />
+            <img src="images/logo/png" alt="" className=""/>
           </Link>
 
           {/* Desktop Navigation */}
@@ -181,7 +178,7 @@ export default function ModuleDetailPage() {
             </Link>
             <button
               onClick={() => handleProtectedRoute("/learncore")}
-              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg text-teal-600  border-b-2 border-teal-600"
+              className="hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg text-teal-600  border-b-2 border-teal-600"
             >
               LearnCore
             </button>
@@ -202,7 +199,7 @@ export default function ModuleDetailPage() {
           {/* Desktop Auth Buttons */}
           <div className="hidden md:flex items-center space-x-3">
             {isLoggedIn ? (
-              <Button onClick={handleLogout} className="bg-teal-600 hover:bg-teal-700 transition-colors">
+              <Button onClick={handleLogout} className="py-6 px-8 text-[16px] bg-teal-600 hover:bg-teal-700 transition-colors">
                 Logout
               </Button>
             ) : (
@@ -210,13 +207,13 @@ export default function ModuleDetailPage() {
                 <Link href="/register">
                   <Button
                     variant="outline"
-                    className="border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent transition-colors"
+                    className="py-6 px-8 text-[16px] border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent transition-colors"
                   >
                     Sign Up
                   </Button>
                 </Link>
                 <Link href="/login">
-                  <Button className="bg-teal-600 hover:bg-teal-700 transition-colors">Login</Button>
+                  <Button className="py-6 px-8 text-[16px] bg-teal-600 hover:bg-teal-700 transition-colors">Login</Button>
                 </Link>
               </>
             )}
