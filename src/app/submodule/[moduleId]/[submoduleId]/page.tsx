@@ -52,6 +52,7 @@ export default function SubModulePage() {
   const [resourcesOpen, setResourcesOpen] = useState(false)
   const [selfLearningOpen, setSelfLearningOpen] = useState(false)
     const [objectivesOpen, setObjectivesOpen] = useState(false)
+  const [subModulesMaterial, setSubModulesMaterial] = useState(false)
 
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
@@ -246,6 +247,20 @@ export default function SubModulePage() {
                         </li>
                       ))}
                     </ul>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+
+            <Collapsible open={subModulesMaterial} onOpenChange={setSubModulesMaterial}>
+                <CollapsibleTrigger className="flex items-center justify-between w-full p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                  <span className="font-medium text-gray-800">Materi Bacaan</span>
+                  <ChevronDown
+                    className={`w-5 h-5 text-gray-600 transition-transform ${subModulesMaterial ? "rotate-180" : ""}`}
+                  />
+                </CollapsibleTrigger>
+                <CollapsibleContent className="mt-2">
+                  <div className="p-4 fbg-white border border-gray-200 rounded-lg">
+                    <div className="html-content" dangerouslySetInnerHTML={{ __html: subModule.sub_module_materials }} />
                   </div>
                 </CollapsibleContent>
               </Collapsible>
