@@ -252,10 +252,10 @@ Fokus pada modul pembelajaran yang telah dipersonalisasi berdasarkan minat Anda 
 
             <Button
               onClick={handleContinue}
-              className="w-full bg-teal-600 hover:bg-teal-700 text-white py-4 text-lg font-semibold"
+              className="w-full bg-teal-600 hover:bg-teal-700 text-white p-6 text-sm font-semibold"
             >
               Mulai Belajar Sekarang
-              <ArrowRight className="w-5 h-5 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </CardContent>
         </Card>

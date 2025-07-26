@@ -249,11 +249,17 @@ export default function QuizPage() {
   const progress = ((currentQuestion + 1) / questions.length) * 100
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white py-16 md:py-0 h-full flex justify-center items-center"
+              style={{
+              backgroundImage: "url('/images/bg.svg')",
+              backgroundRepeat: "repeat",
+              backgroundPosition: "center",
+            }}
+    >
       {/* Header - Quiz Mode (No Logout Button, Disabled Navbar) */}
 
       {/* Quiz Content */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 ">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
           <div className="text-center mb-12">

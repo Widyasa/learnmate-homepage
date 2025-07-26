@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Users, BookOpen, Award, MessageCircle, Play, ChevronLeft, ChevronRight, X, Menu } from "lucide-react"
+import { Users, BookOpen, Award, MessageCircle, Play, ChevronLeft, ChevronRight, X, Menu, Clock } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { supabaseClient } from "@/lib/supabase"
@@ -72,11 +72,13 @@ const [modules, setModules] = useState<any[]>([])
 
   useEffect(() => {
     async function fetchModules() {
-      const { data, error } = await supabaseClient
-        .from("modules")
-      .select("*, categories(*)")
-        .order("created_at", { ascending: true })
-      if (!error && data) setModules(data)
+      const { data: modulesData } = await supabaseClient
+      .from("view_modules_with_summary")
+      .select("*")
+      .order("module_created_at", { ascending: true })
+      .range(0, 3) 
+      console.error("Error fetching modules:", modulesData)
+      setModules(modulesData || [])
     }
     fetchModules()
   }, [])
@@ -92,7 +94,7 @@ const [modules, setModules] = useState<any[]>([])
   return (
     <div className="min-h-screen bg-white overflow-x-hidden">
       {/* Header */}
-          <header className="border-b border-gray-100 px-4 py-4 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
+      <header className="border-b border-gray-100 px-4 py-4 fixed w-full top-0 bg-white/95 backdrop-blur-sm z-50">
         <div className="container mx-auto flex items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <img src="logo.svg" alt="" />
@@ -100,24 +102,24 @@ const [modules, setModules] = useState<any[]>([])
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-teal-600 font-medium transition-colors">
+            <Link href="/" className=" hover:text-teal-600 font-medium transition-colors text-lg text-teal-600  border-b-2 border-teal-600">
               Home
             </Link>
             <button
               onClick={() => handleProtectedRoute("/learncore")}
-              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors"
+              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg"
             >
               LearnCore
             </button>
             <button
               onClick={() => handleProtectedRoute("/chatbot")}
-              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors"
+              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg"
             >
               Chatbot
             </button>
             <button
               onClick={() => handleProtectedRoute("/timer")}
-              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors"
+              className="text-gray-700 hover:text-teal-600 font-medium cursor-pointer transition-colors text-lg"
             >
               Timer
             </button>
@@ -393,41 +395,41 @@ const [modules, setModules] = useState<any[]>([])
             tapi tetap fokus dan mendalam.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {modules
-            .slice()
-            .sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
-            .slice(0, 4)
-            .map((mod) => (
-            <Card
-              key={mod.id}
-              className="overflow-hidden hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 bg-white border-0 rounded-xl flex flex-col"
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {modules.map((module) => (
+            <div
+              key={module.module_id}
+              className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
             >
-              <div className="relative">
+              {/* Module Image */}
+              <div className="relative h-48 bg-gray-100">
                 <img
-                  src={mod.thumbnail || "/placeholder.svg"}
-                  alt={mod.title}
-                  className="w-full object-cover"
+                  src={module.thumbnail || "/placeholder.svg"}
+                  alt={module.module_title}
+                  className="w-full h-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div className="absolute top-4 left-4">
-                  <Badge className="bg-orange-500 hover:bg-orange-600 text-white font-semibold">
-                    {mod.categories?.category_name || "Umum"}
-                  </Badge>
-                </div>
               </div>
-              <CardContent className="p-6 flex-1 flex flex-col">
-                <h3 className="font-bold text-orange-500 text-xl mb-3 leading-tight">{mod.title}</h3>
-                <p className="text-gray-600 leading-relaxed mb-2 line-clamp-2">{mod.summary}</p>
-                <p className="text-gray-500 text-xs mb-4 line-clamp-3">{mod.learning_description}</p>
+
+              {/* Module Content */}
+              <div className="p-4">
+                <h3 className="text-lg font-semibold text-orange-500 mb-2">{module.module_title}</h3>
+                <p className="text-gray-600 text-sm mb-3 line-clamp-4">{module.module_summary}</p>
+
+                {/* Duration */}
+                <div className="flex items-center text-gray-500 text-sm mb-4">
+                  <Clock className="w-4 h-4 mr-1" />
+                  <span>{module.total_duration_minutes} Menit</span>
+                </div>
+
+                {/* Learn Button */}
                 <Button
-                  variant="outline"
-                  className="w-full border-teal-600 text-teal-600 hover:bg-teal-50 bg-transparent mt-auto"
+                  onClick={() => handleModuleClick(module.module_id)}
+                  className="w-full bg-teal-600 hover:bg-teal-700 text-white py-2 rounded-md font-medium"
                 >
-                  Mulai Belajar
+                  Belajar Modul
                 </Button>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
 

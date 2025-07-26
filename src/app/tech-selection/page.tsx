@@ -104,30 +104,18 @@ export default function TechSelectionPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen py-16 md:py-0 h-full flex flex-col justify-center items-center"
+            style={{
+              backgroundImage: "url('/images/bg.svg')",
+              backgroundRepeat: "repeat",
+              backgroundPosition: "center",
+            }}
+    >
       {/* Header - Tech Selection Mode (No Logout Button, Disabled Navbar) */}
-      <header className="border-b border-gray-100 px-4 py-4">
-        <div className="container mx-auto flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="bg-teal-600 text-white px-2 py-1 rounded font-bold text-lg">LM</div>
-          </div>
 
-          <nav className="hidden md:flex items-center space-x-8">
-            <span className="text-gray-400 font-medium cursor-not-allowed">Home</span>
-            <span className="text-gray-400 font-medium cursor-not-allowed">Learncore</span>
-            <span className="text-gray-400 font-medium cursor-not-allowed">Chatbot</span>
-            <span className="text-gray-400 font-medium cursor-not-allowed">Timer</span>
-          </nav>
-
-          {/* Mulai Belajar button (disabled during selection) */}
-          <Button disabled className="bg-teal-600 hover:bg-teal-700 opacity-50 cursor-not-allowed">
-            Mulai Belajar
-          </Button>
-        </div>
-      </header>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 ">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <div className="text-center mb-16">

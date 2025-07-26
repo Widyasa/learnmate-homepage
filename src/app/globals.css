@@ -147,7 +147,10 @@ html {
 }
 
 /* List styles */
-
+.html-content ul,
+.html-content ol {
+  margin-left: 1.5rem;
+}
 .html-content ul {
   list-style-type: disc;
 }
